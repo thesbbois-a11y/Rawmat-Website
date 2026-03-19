@@ -143,17 +143,14 @@
         <header class="sticky top-0 z-50 w-full border-b border-white/10 backdrop-blur-md px-6 md:px-20 py-5"
             style="background-color:rgba(109,16,18,0.95);">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="flex flex-col leading-none">
-                    <span class="text-2xl logo-font uppercase text-white">RAWMAT</span>
-                    <span class="text-xs font-bold tracking-[0.45em] uppercase text-white ml-0.5">Coffee</span>
+                <div class="flex items-center">
+                    <img src="logo-white.png" alt="RAWMAT Coffee" class="h-20 w-auto" />
                 </div>
                 <nav class="hidden md:flex items-center gap-12">
                     <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
                         href="#ecosystem">Ecosystem</a>
                     <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
-                        href="#menu">Catalog</a>
-                    <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
-                        href="#process">Process</a>
+                        href="#menu">Menu</a>
                 </nav>
                 <!-- Navbar CTA: white bg for contrast on red -->
                 <a href="https://apps.apple.com/th/app/rawmat-coffee/id6737322640" target="_blank"
@@ -345,34 +342,31 @@
                 <div class="max-w-7xl mx-auto">
                     <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
                         <div>
-                            <h2 class="text-xs font-black text-accent tracking-[0.5em] uppercase mb-4">The Catalog
+                            <h2 class="text-xs font-black text-accent tracking-[0.5em] uppercase mb-4">The Menu
                             </h2>
                             <h3 class="text-4xl md:text-5xl font-bold tracking-tighter uppercase">FLAVOR PROFILES</h3>
                         </div>
                         <div class="flex gap-2 p-1" style="background-color:rgba(109,16,18,0.5);">
-                            <button
+                            <button id="btn-signature" onclick="switchTab('signature')"
                                 class="px-8 py-2 bg-white text-primary text-xs font-black uppercase tracking-widest">Signature</button>
-                            <button
-                                class="px-8 py-2 text-white/50 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Bean Specialty</button>
+                            <button id="btn-bean-specialty" onclick="switchTab('bean-specialty')"
+                                class="px-8 py-2 text-white/50 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Bean
+                                Specialty</button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                    <div id="tab-signature" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
                         <!-- Product 1 -->
                         <div class="group">
                             <div
                                 class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
-                                <img alt="Orange Coffee"
+                                <img alt="Iced Orange Coffee"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                     src="sig-orange-coffee.jpg" />
-                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
-                                    style="background-color:rgba(109,16,18,0.85);">
-                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
-                                </div>
                             </div>
                             <div class="flex justify-between items-start gap-4">
                                 <div>
-                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Orange Coffee</h5>
-                                    <p class="text-xs text-white/55 font-light leading-relaxed">Cold brew espresso, fresh orange, rosemary.</p>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Iced Orange Coffee</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Floral Fruity</p>
                                 </div>
                                 <!-- Coffee cherry icon -->
                                 <div
@@ -395,18 +389,14 @@
                         <div class="group">
                             <div
                                 class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
-                                <img alt="Peach Lychee Sparkling Coffee"
+                                <img alt="Iced Peach Lychee Sparkling"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                     src="sig-peach-lychee.jpg" />
-                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
-                                    style="background-color:rgba(109,16,18,0.85);">
-                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
-                                </div>
                             </div>
                             <div class="flex justify-between items-start gap-4">
                                 <div>
-                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Peach Lychee Sparkling Coffee</h5>
-                                    <p class="text-xs text-white/55 font-light leading-relaxed">Espresso, peach, lychee, sparkling water.</p>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Iced Peach Lychee Sparkling</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Floral Fruity</p>
                                 </div>
                                 <!-- Coffee plant sprout icon -->
                                 <div
@@ -429,18 +419,14 @@
                         <div class="group">
                             <div
                                 class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
-                                <img alt="Mango Sticky Rice Latte"
+                                <img alt="Iced Mango Sticky Rice Latte"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                                     src="sig-mango-latte.jpg" />
-                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
-                                    style="background-color:rgba(109,16,18,0.85);">
-                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
-                                </div>
                             </div>
                             <div class="flex justify-between items-start gap-4">
                                 <div>
-                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Mango Sticky Rice Latte</h5>
-                                    <p class="text-xs text-white/55 font-light leading-relaxed">Espresso, mango, sticky rice cream foam.</p>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Iced Mango Sticky Rice Latte</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Honey Candy</p>
                                 </div>
                                 <!-- Coffee bean icon -->
                                 <div
@@ -458,41 +444,122 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
 
-            <!-- Process Section: use dark red for contrast -->
-            <section class="py-32 relative overflow-hidden" id="process" style="background-color:#6d1012;">
-                <div class="absolute inset-0 halftone-bg opacity-40"></div>
-                <div class="max-w-7xl mx-auto px-6 md:px-20 relative z-10 text-center">
-                    <h2 class="text-xs font-black text-white/60 tracking-[0.5em] uppercase mb-16">The Workflow</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 relative">
-                        <div class="flex flex-col items-center group">
-                            <div
-                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
-                                01</div>
-                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Digital Entry</h4>
-                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Profile
-                                identification via app or terminal nodes.</p>
+                    <!-- Bean Specialty Tab -->
+                    <div id="tab-bean-specialty" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="group overflow-hidden border border-white/15 hover:border-white/40 transition-all duration-500">
+                            <img src="Selected beans-06.png" alt="Floral Fruity" class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700" />
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div
-                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
-                                02</div>
-                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Auto Craft</h4>
-                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Precision brewing
-                                managed by cloud-synced hardware.</p>
+                        <div class="group overflow-hidden border border-white/15 hover:border-white/40 transition-all duration-500">
+                            <img src="Selected beans-07.png" alt="Honey Candy" class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700" />
                         </div>
-                        <div class="flex flex-col items-center group">
-                            <div
-                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
-                                03</div>
-                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Direct Access</h4>
-                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Zero-latency
-                                collection at your designated pickup port.</p>
+                        <div class="group overflow-hidden border border-white/15 hover:border-white/40 transition-all duration-500">
+                            <img src="Selected beans-08.png" alt="Nutty Chocolate" class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700" />
+                        </div>
+                        <div class="group overflow-hidden border border-white/15 hover:border-white/40 transition-all duration-500">
+                            <img src="Selected beans-09.png" alt="Special Beans" class="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-700" />
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <script>
+                function switchTab(tab) {
+                    const sigGrid = document.getElementById('tab-signature');
+                    const beanGrid = document.getElementById('tab-bean-specialty');
+                    const sigBtn = document.getElementById('btn-signature');
+                    const beanBtn = document.getElementById('btn-bean-specialty');
+                    if (tab === 'signature') {
+                        sigGrid.classList.remove('hidden');
+                        beanGrid.classList.add('hidden');
+                        sigBtn.classList.add('bg-white', 'text-primary');
+                        sigBtn.classList.remove('text-white/50');
+                        beanBtn.classList.remove('bg-white', 'text-primary');
+                        beanBtn.classList.add('text-white/50');
+                    } else {
+                        beanGrid.classList.remove('hidden');
+                        sigGrid.classList.add('hidden');
+                        beanBtn.classList.add('bg-white', 'text-primary');
+                        beanBtn.classList.remove('text-white/50');
+                        sigBtn.classList.remove('bg-white', 'text-primary');
+                        sigBtn.classList.add('text-white/50');
+                    }
+                }
+            </script>
+
+            <!-- Menu Slideshow Section -->
+            <section class="relative overflow-hidden" id="process" style="background-color:#6d1012;">
+                <div class="slideshow-track">
+                    <div class="slideshow-inner" id="slideshow-inner">
+                        <img src="Iced/RM-Orange coffee.png" alt="" />
+                        <img src="Iced/RM-Coconut Latte.png" alt="" />
+                        <img src="Iced/RM-Peach lychee sparking coffee.png" alt="" />
+                        <img src="Iced/RM-Mango sticky rice latte.png" alt="" />
+                        <img src="Iced/RM-Biscoff Dalgona.png" alt="" />
+                        <img src="Iced/RM-Caffe Latte.png" alt="" />
+                        <img src="Iced/RM-Americano.png" alt="" />
+                        <img src="Iced/RM-Cold brew.png" alt="" />
+                        <img src="Iced/RM-Matcha Latte.png" alt="" />
+                        <img src="Iced/RM-Caffe mocha.png" alt="" />
+                        <img src="Iced/RM-Caramel Mac.png" alt="" />
+                        <img src="Iced/RM-Tiramisu Coffee Latte.png" alt="" />
+                        <img src="Iced/RM-Earl Grey Coffee Latte.png" alt="" />
+                        <img src="Iced/RM-Matcha coconut Cloud.png" alt="" />
+                        <img src="Iced/RM-Taro mochi latte.png" alt="" />
+                        <img src="Iced/RM-Strawberry coffee.png" alt="" />
+                        <img src="Iced/RM-LAVENDO SOUR.png" alt="" />
+                        <img src="Iced/RM-Lemonade fizz.png" alt="" />
+                        <img src="Iced/RM-Shine muscat tea.png" alt="" />
+                        <img src="Iced/RM-Just like Mulled wine.png" alt="" />
+                        <!-- duplicate for seamless loop -->
+                        <img src="Iced/RM-Orange coffee.png" alt="" />
+                        <img src="Iced/RM-Coconut Latte.png" alt="" />
+                        <img src="Iced/RM-Peach lychee sparking coffee.png" alt="" />
+                        <img src="Iced/RM-Mango sticky rice latte.png" alt="" />
+                        <img src="Iced/RM-Biscoff Dalgona.png" alt="" />
+                        <img src="Iced/RM-Caffe Latte.png" alt="" />
+                        <img src="Iced/RM-Americano.png" alt="" />
+                        <img src="Iced/RM-Cold brew.png" alt="" />
+                        <img src="Iced/RM-Matcha Latte.png" alt="" />
+                        <img src="Iced/RM-Caffe mocha.png" alt="" />
+                        <img src="Iced/RM-Caramel Mac.png" alt="" />
+                        <img src="Iced/RM-Tiramisu Coffee Latte.png" alt="" />
+                        <img src="Iced/RM-Earl Grey Coffee Latte.png" alt="" />
+                        <img src="Iced/RM-Matcha coconut Cloud.png" alt="" />
+                        <img src="Iced/RM-Taro mochi latte.png" alt="" />
+                        <img src="Iced/RM-Strawberry coffee.png" alt="" />
+                        <img src="Iced/RM-LAVENDO SOUR.png" alt="" />
+                        <img src="Iced/RM-Lemonade fizz.png" alt="" />
+                        <img src="Iced/RM-Shine muscat tea.png" alt="" />
+                        <img src="Iced/RM-Just like Mulled wine.png" alt="" />
+                    </div>
+                </div>
+                <style>
+                    .slideshow-track {
+                        overflow: hidden;
+                        width: 100%;
+                        padding: 48px 0;
+                    }
+                    .slideshow-inner {
+                        display: flex;
+                        gap: 24px;
+                        width: max-content;
+                        animation: slide-loop 50s linear infinite;
+                    }
+                    .slideshow-inner img {
+                        height: 320px;
+                        width: auto;
+                        object-fit: contain;
+                        flex-shrink: 0;
+                    }
+                    @keyframes slide-loop {
+                        0%   { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .slideshow-inner:hover {
+                        animation-play-state: paused;
+                    }
+                </style>
             </section>
 
         </main>
@@ -502,9 +569,8 @@
             <div class="max-w-7xl mx-auto">
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
                     <div class="md:col-span-5 flex flex-col gap-8">
-                        <div class="flex flex-col leading-none">
-                            <span class="text-3xl logo-font tracking-tighter uppercase text-white">RAWMAT</span>
-                            <span class="text-sm font-medium tracking-[0.5em] uppercase text-accent">Coffee</span>
+                        <div class="flex items-center">
+                            <img src="logo-white.png" alt="RAWMAT Coffee" class="h-28 w-auto" />
                         </div>
                         <div class="flex flex-col gap-2 max-w-xs">
                             <p class="text-white font-semibold text-sm">Rawmat Coffee Company Limited</p>
@@ -514,8 +580,7 @@
                                 Saphan Sung, Bangkok 10240,<br />
                                 Thailand
                             </p>
-                            <span
-                                class="text-accent mt-2 block font-bold tracking-widest uppercase text-xs">Precision
+                            <span class="text-accent mt-2 block font-bold tracking-widest uppercase text-xs">Precision
                                 Engineered Coffee.</span>
                         </div>
                     </div>
@@ -538,15 +603,6 @@
                             <a class="hover:text-white transition-colors"
                                 href="https://page.line.me/266cbzrb?oat_content=url&openQrModal=true" target="_blank"
                                 rel="noopener noreferrer">Line</a>
-                        </div>
-                    </div>
-                    <div class="md:col-span-3 flex flex-col gap-6">
-                        <h5 class="text-xs font-black uppercase tracking-[0.3em] text-accent">Status</h5>
-                        <div class="flex items-center gap-3 p-4 border border-white/10"
-                            style="background-color:rgba(138,24,26,0.4);">
-                            <span class="size-2 rounded-full bg-green-400 animate-pulse"></span>
-                            <span class="text-xs font-black uppercase tracking-widest text-white/60">All System
-                                Nodes Online</span>
                         </div>
                     </div>
                 </div>
