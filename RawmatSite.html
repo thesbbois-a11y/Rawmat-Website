@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>RAWMAT Coffee | Digital Roastery Ecosystem</title>
+    <script>
+        const APP_STORE_URL = "https://apps.apple.com/th/app/rawmat-coffee/id6737322640";
+        const PLAY_STORE_URL = "#";
+
+        function buildTrackedUrl(baseUrl, placement = "cta") {
+            const url = new URL(baseUrl, window.location.href);
+            const params = new URLSearchParams(window.location.search);
+            const utmSource = params.get("utm_source") || "rawmat_website";
+            const utmMedium = params.get("utm_medium") || "organic";
+            const utmCampaign = params.get("utm_campaign") || "app_download";
+            url.searchParams.set("utm_source", utmSource);
+            url.searchParams.set("utm_medium", utmMedium);
+            url.searchParams.set("utm_campaign", utmCampaign);
+            url.searchParams.set("utm_content", placement);
+            return url.toString();
+        }
+
+        function getAppStoreLink() {
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /android/i.test(ua);
+            if (isAndroid && PLAY_STORE_URL !== "#") return PLAY_STORE_URL;
+            return APP_STORE_URL;
+        }
+
+        function handleAppDownload(event, placement = "cta") {
+            if (event) event.preventDefault();
+            const finalUrl = buildTrackedUrl(getAppStoreLink(), placement);
+            if (window.gtag) {
+                window.gtag("event", "app_download_click", {
+                    event_category: "engagement",
+                    event_label: placement,
+                    destination: finalUrl
+                });
+            }
+            window.open(finalUrl, "_blank", "noopener,noreferrer");
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fontsource/line-seed-sans-th/index.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        function toggleStory() {
+            const panel = document.getElementById('story-panel');
+            const isOpen = panel.classList.contains('open');
+            if (isOpen) {
+                panel.style.maxHeight = '0px';
+                panel.classList.remove('open');
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + 200 + 'px';
+                panel.classList.add('open');
+            }
+        }
+    </script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8a181a",   // Cherry Red
+                        "primary-dark": "#6d1012",   // Darker Cherry Red
+                        "accent": "#f8a28c",   // Cherry Flavor
+                        "background-dark": "#8a181a",   // Cherry Red (main bg)
+                        "background-light": "#ffffff",   // Pure Essential
+                        "neutral-800": "#6d1012",
+                        "neutral-700": "#7a1416",
+                        "neutral-400": "#f5c8bb",   // warm near-white tint on red bg
+                    },
+                    fontFamily: {
+                        "sans": ["Line Seed Sans TH", "sans-serif"],
+                        "display": ["Line Seed Sans TH", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Line Seed Sans TH", sans-serif;
+            background-color: #8a181a;
+            /* Cherry Red */
+        }
+
+        /* Halftone: salmon dots concentrated at corners, fading toward center — matches brand book cover */
+        .halftone-bg {
+            background-image: radial-gradient(circle, rgba(196, 96, 80, 0.85) 1.5px, transparent 1.5px);
+            background-size: 16px 16px;
+            -webkit-mask-image: radial-gradient(ellipse at center, transparent 15%, rgba(0, 0, 0, 0.4) 50%, black 100%);
+            mask-image: radial-gradient(ellipse at center, transparent 15%, rgba(0, 0, 0, 0.4) 50%, black 100%);
+            opacity: 0.9;
+        }
+
+        .halftone-overlay {
+            background-image: radial-gradient(rgba(196, 96, 80, 0.5) 1.5px, transparent 1.5px);
+            background-size: 12px 12px;
+        }
+
+        /* Brand logo font — chunky bold, matches RAWMAT identity */
+        .logo-font {
+            font-family: "Lilita One", cursive;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+        }
+
+        .sensory-icon {
+            filter: brightness(0) saturate(100%) invert(18%) sepia(59%) saturate(3665%) hue-rotate(345deg) brightness(88%) contrast(100%);
+        }
+
+        /* Our Story panel transition */
+        #story-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        #story-panel.open {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="text-white antialiased overflow-x-hidden" style="background-color:#8a181a;">
+
+    <div class="relative flex min-h-screen w-full flex-col">
+
+        <!-- Navigation -->
+        <header class="sticky top-0 z-50 w-full border-b border-white/10 backdrop-blur-md px-6 md:px-20 py-5"
+            style="background-color:rgba(109,16,18,0.95);">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="flex flex-col leading-none">
+                    <span class="text-2xl logo-font uppercase text-white">RAWMAT</span>
+                    <span class="text-xs font-bold tracking-[0.45em] uppercase text-white ml-0.5">Coffee</span>
+                </div>
+                <nav class="hidden md:flex items-center gap-12">
+                    <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
+                        href="#ecosystem">Ecosystem</a>
+                    <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
+                        href="#menu">Catalog</a>
+                    <a class="text-sm font-bold tracking-widest uppercase hover:text-accent transition-colors"
+                        href="#process">Process</a>
+                </nav>
+                <!-- Navbar CTA: white bg for contrast on red -->
+                <a href="https://apps.apple.com/th/app/rawmat-coffee/id6737322640" target="_blank"
+                    rel="noopener noreferrer" onclick="handleAppDownload(event, 'navbar_download_app')"
+                    class="bg-white hover:bg-accent text-primary px-6 py-2.5 text-xs font-black tracking-[0.2em] uppercase transition-all inline-flex items-center gap-2">
+                    Download App
+                </a>
+            </div>
+        </header>
+
+        <main class="flex-1">
+
+            <!-- Hero Section -->
+            <section class="relative min-h-[90vh] flex items-center overflow-hidden pt-16 pb-24 md:pt-0 md:pb-0"
+                style="background-color:#8a181a;">
+                <div class="absolute inset-0 halftone-bg"></div>
+                <div
+                    class="max-w-7xl mx-auto px-6 md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+                    <div class="flex flex-col gap-8">
+                        <div
+                            class="inline-flex items-center gap-3 px-4 py-1.5 bg-white/10 border-l-4 border-accent text-accent text-xs font-black tracking-[0.3em] uppercase">
+                            Digital First Roastery
+                        </div>
+                        <h1 class="text-6xl md:text-8xl leading-[0.95] logo-font">
+                            RAWMAT<br /><span class="text-accent">COFFEE</span>
+                        </h1>
+                        <p
+                            class="text-lg md:text-xl text-white/70 max-w-md leading-relaxed font-light border-l border-white/30 pl-6">
+                            Seamless urban caffeine rituals powered by a fully integrated digital architecture.
+                        </p>
+                        <div class="flex flex-wrap gap-4 pt-4 items-start">
+                            <a href="https://apps.apple.com/th/app/rawmat-coffee/id6737322640" target="_blank"
+                                rel="noopener noreferrer" onclick="handleAppDownload(event, 'hero_primary_cta')"
+                                class="bg-white hover:bg-accent text-primary px-10 py-5 text-sm font-black tracking-[0.2em] uppercase transition-all duration-300 inline-block text-center">
+                                Get the App
+                            </a>
+                            <button id="story-btn" onclick="toggleStory()"
+                                class="border border-white/40 hover:border-accent hover:text-accent text-white px-10 py-5 text-sm font-black tracking-[0.2em] uppercase transition-all duration-300">
+                                Our Story
+                            </button>
+                        </div>
+
+                        <!-- Our Story expandable panel -->
+                        <div id="story-panel">
+                            <div class="border-l-2 border-accent pl-6 py-4 flex flex-col gap-4 mt-2">
+                                <h3 class="text-base font-black uppercase tracking-widest text-white">Our Story</h3>
+                                <p class="text-white/70 text-sm leading-relaxed font-light">
+                                    RAWMAT Coffee Thailand is a modern coffee brand focused on delivering a seamless,
+                                    high-quality coffee experience through both physical and digital channels.
+                                </p>
+                                <p class="text-white/70 text-sm leading-relaxed font-light">
+                                    We operate an integrated ecosystem including mobile application ordering, in-store
+                                    self-service kiosks, and delivery platforms. Our operations are fully cashless to
+                                    ensure speed, accuracy, and convenience.
+                                </p>
+                                <p class="text-white/70 text-sm leading-relaxed font-light">
+                                    Our goal is to provide consistent product quality while leveraging technology and
+                                    data to enhance customer experience and operational efficiency.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative flex justify-center lg:justify-end">
+                        <div
+                            class="relative w-full aspect-[4/5] max-w-[500px] overflow-hidden border border-white/15 group">
+                            <div
+                                class="absolute inset-0 bg-[#6d1012]/30 mix-blend-multiply transition-opacity group-hover:opacity-0">
+                            </div>
+                            <img alt="RAWMAT Coffee Cup"
+                                class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                                src="RM_Main_Photo.png" />
+                            <div class="absolute top-0 right-0 w-32 h-32 halftone-overlay opacity-40"></div>
+                        </div>
+                        <!-- Stats Overlay -->
+                        <div class="absolute -bottom-8 -left-8 p-8 border border-white/15 shadow-2xl hidden md:block"
+                            style="background-color:#6d1012;">
+                            <div class="flex items-center gap-4 mb-3">
+                                <span class="material-symbols-outlined text-accent">coffee</span>
+                                <span class="text-xs font-black tracking-[0.2em] uppercase text-white/60">Caffeine
+                                    Level</span>
+                            </div>
+                            <div class="text-3xl font-bold text-white mb-2">99.9%</div>
+                            <p class="text-[10px] text-accent font-bold tracking-widest uppercase">Fully Loaded</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Ecosystem Section -->
+            <section class="py-32 px-6 md:px-20 border-y border-white/10" id="ecosystem"
+                style="background-color:#6d1012;">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col mb-20">
+                        <h2 class="text-xs font-black text-accent tracking-[0.5em] uppercase mb-4">Architecture</h2>
+                        <h3 class="text-4xl md:text-5xl font-bold tracking-tighter">RAWMAT ECOSYSTEM</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+                        <!-- Card 1 -->
+                        <div class="group p-12 border border-white/10 hover:border-white/40 transition-all duration-500"
+                            style="background-color:#8a181a;">
+                            <div class="mb-10 opacity-80 group-hover:opacity-100 transition-opacity">
+                                <!-- Emoji: Drinking face (Mobile) -->
+                                <svg width="56" height="56" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="32" cy="34" r="24" fill="#f8a28c" fill-opacity="0.35" />
+                                    <path d="M18 26 Q17 18 24 17 Q26 11 31 15 Q33 9 35 15 Q40 11 42 17 Q49 18 48 26"
+                                        stroke="#f8a28c" stroke-width="1.8" fill="none" stroke-linecap="round" />
+                                    <circle cx="32" cy="34" r="18" stroke="#f8a28c" stroke-width="1.8" />
+                                    <circle cx="26" cy="31" r="2" fill="#f8a28c" />
+                                    <circle cx="38" cy="31" r="2" fill="#f8a28c" />
+                                    <path d="M25 40 Q32 46 39 40" stroke="#f8a28c" stroke-width="2"
+                                        stroke-linecap="round" fill="none" />
+                                    <rect x="42" y="38" width="10" height="8" rx="1" stroke="#f8a28c" stroke-width="1.5"
+                                        fill="none" />
+                                    <path d="M52 41 Q56 41 56 42.5 Q56 44 52 44" stroke="#f8a28c" stroke-width="1.5"
+                                        fill="none" />
+                                    <path d="M40 42 L42 42" stroke="#f8a28c" stroke-width="1.5"
+                                        stroke-linecap="round" />
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold mb-6 tracking-tight uppercase">RAWMAT Mobile Experience</h4>
+                            <p class="text-white/55 leading-relaxed font-light text-sm mb-8">Seamless coffee ordering,
+                                loyalty integration, and personalized user journey through the RAWMAT mobile
+                                application.</p>
+                            <div class="h-0.5 w-12 bg-accent group-hover:w-full transition-all duration-700"></div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="group p-12 border border-white/10 hover:border-white/40 transition-all duration-500"
+                            style="background-color:#8a181a;">
+                            <div class="mb-10 opacity-80 group-hover:opacity-100 transition-opacity">
+                                <!-- Emoji: Wifi/Aroma cloud face (Kiosk) -->
+                                <svg width="56" height="56" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="32" cy="36" r="22" fill="#f8a28c" fill-opacity="0.35" />
+                                    <path d="M24 14 Q32 8 40 14" stroke="#f8a28c" stroke-width="1.8" fill="none"
+                                        stroke-linecap="round" />
+                                    <path d="M27 19 Q32 15 37 19" stroke="#f8a28c" stroke-width="1.8" fill="none"
+                                        stroke-linecap="round" />
+                                    <circle cx="32" cy="22" r="2" fill="#f8a28c" />
+                                    <path
+                                        d="M14 38 Q12 27 20 25 Q22 18 30 20 Q32 16 34 20 Q42 18 44 25 Q52 27 50 38 Q52 46 44 48 L20 48 Q12 46 14 38 Z"
+                                        stroke="#f8a28c" stroke-width="1.8" fill="none" />
+                                    <circle cx="26" cy="34" r="2" fill="#f8a28c" />
+                                    <circle cx="38" cy="34" r="2" fill="#f8a28c" />
+                                    <path d="M25 42 Q32 48 39 42" stroke="#f8a28c" stroke-width="2"
+                                        stroke-linecap="round" fill="none" />
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold mb-6 tracking-tight uppercase">In-Store Smart Kiosk System</h4>
+                            <p class="text-white/55 leading-relaxed font-light text-sm mb-8">Self-service ordering
+                                terminals designed to enhance in-store efficiency and reduce waiting time with a
+                                frictionless customer experience.</p>
+                            <div class="h-0.5 w-12 bg-accent group-hover:w-full transition-all duration-700"></div>
+                        </div>
+                        <!-- Card 3 -->
+                        <div class="group p-12 border border-white/10 hover:border-white/40 transition-all duration-500"
+                            style="background-color:#8a181a;">
+                            <div class="mb-10 opacity-80 group-hover:opacity-100 transition-opacity">
+                                <!-- Emoji: Tasting face (Hardware) -->
+                                <svg width="56" height="56" viewBox="0 0 64 64" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="32" cy="34" r="24" fill="#f8a28c" fill-opacity="0.35" />
+                                    <circle cx="32" cy="34" r="18" stroke="#f8a28c" stroke-width="1.8" />
+                                    <path d="M24 30 Q26 27 28 30" stroke="#f8a28c" stroke-width="2"
+                                        stroke-linecap="round" fill="none" />
+                                    <path d="M36 30 Q38 27 40 30" stroke="#f8a28c" stroke-width="2"
+                                        stroke-linecap="round" fill="none" />
+                                    <path d="M25 40 Q32 46 39 40" stroke="#f8a28c" stroke-width="2"
+                                        stroke-linecap="round" fill="none" />
+                                    <path d="M38 46 Q44 48 46 44" stroke="#f8a28c" stroke-width="1.5"
+                                        stroke-linecap="round" fill="none" />
+                                    <circle cx="46" cy="43" r="2" stroke="#f8a28c" stroke-width="1.5" fill="none" />
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold mb-6 tracking-tight uppercase">On-Demand Delivery Integration
+                            </h4>
+                            <p class="text-white/55 leading-relaxed font-light text-sm mb-8">Multi-platform delivery
+                                connectivity (e.g., Grab) enabling customers to access RAWMAT coffee anytime, anywhere.
+                            </p>
+                            <div class="h-0.5 w-12 bg-accent group-hover:w-full transition-all duration-700"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Catalog Section -->
+            <section class="py-32 px-6 md:px-20" id="menu" style="background-color:#8a181a;">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                        <div>
+                            <h2 class="text-xs font-black text-accent tracking-[0.5em] uppercase mb-4">The Catalog
+                            </h2>
+                            <h3 class="text-4xl md:text-5xl font-bold tracking-tighter uppercase">FLAVOR PROFILES</h3>
+                        </div>
+                        <div class="flex gap-2 p-1" style="background-color:rgba(109,16,18,0.5);">
+                            <button
+                                class="px-8 py-2 bg-white text-primary text-xs font-black uppercase tracking-widest">Signature</button>
+                            <button
+                                class="px-8 py-2 text-white/50 hover:text-white text-xs font-black uppercase tracking-widest transition-colors">Bean Specialty</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+                        <!-- Product 1 -->
+                        <div class="group">
+                            <div
+                                class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
+                                <img alt="Orange Coffee"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                    src="sig-orange-coffee.jpg" />
+                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
+                                    style="background-color:rgba(109,16,18,0.85);">
+                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-start gap-4">
+                                <div>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Orange Coffee</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Cold brew espresso, fresh orange, rosemary.</p>
+                                </div>
+                                <!-- Coffee cherry icon -->
+                                <div
+                                    class="w-10 h-10 flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                        class="w-full h-full">
+                                        <circle cx="22" cy="42" r="10" stroke="#f8a28c" stroke-width="2" />
+                                        <circle cx="42" cy="42" r="10" stroke="#f8a28c" stroke-width="2" />
+                                        <circle cx="22" cy="42" r="4" fill="#f8a28c" fill-opacity="0.4" />
+                                        <circle cx="42" cy="42" r="4" fill="#f8a28c" fill-opacity="0.4" />
+                                        <path d="M22 32 Q22 22 32 18 Q42 22 42 32" stroke="#f8a28c" stroke-width="2"
+                                            fill="none" stroke-linecap="round" />
+                                        <path d="M32 18 Q34 12 38 10" stroke="#f8a28c" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product 2 -->
+                        <div class="group">
+                            <div
+                                class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
+                                <img alt="Peach Lychee Sparkling Coffee"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                    src="sig-peach-lychee.jpg" />
+                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
+                                    style="background-color:rgba(109,16,18,0.85);">
+                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-start gap-4">
+                                <div>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Peach Lychee Sparkling Coffee</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Espresso, peach, lychee, sparkling water.</p>
+                                </div>
+                                <!-- Coffee plant sprout icon -->
+                                <div
+                                    class="w-10 h-10 flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                        class="w-full h-full">
+                                        <path d="M32 54 L32 28" stroke="#f8a28c" stroke-width="2.5"
+                                            stroke-linecap="round" />
+                                        <path d="M32 38 Q20 34 18 22 Q28 20 34 30" stroke="#f8a28c" stroke-width="2"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M32 30 Q44 26 46 14 Q36 12 30 22" stroke="#f8a28c" stroke-width="2"
+                                            fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M22 52 Q32 48 42 52" stroke="#f8a28c" stroke-width="2"
+                                            stroke-linecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Product 3 -->
+                        <div class="group">
+                            <div
+                                class="relative aspect-square overflow-hidden mb-8 border border-white/15 transition-all duration-700">
+                                <img alt="Mango Sticky Rice Latte"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                    src="sig-mango-latte.jpg" />
+                                <div class="absolute bottom-4 right-4 backdrop-blur-sm px-4 py-2 border border-white/20"
+                                    style="background-color:rgba(109,16,18,0.85);">
+                                    <span class="text-accent font-bold text-sm tracking-tighter">฿95</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-start gap-4">
+                                <div>
+                                    <h5 class="text-lg font-bold uppercase tracking-tight mb-2">Mango Sticky Rice Latte</h5>
+                                    <p class="text-xs text-white/55 font-light leading-relaxed">Espresso, mango, sticky rice cream foam.</p>
+                                </div>
+                                <!-- Coffee bean icon -->
+                                <div
+                                    class="w-10 h-10 flex-shrink-0 opacity-50 group-hover:opacity-100 transition-opacity">
+                                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                        class="w-full h-full">
+                                        <ellipse cx="32" cy="32" rx="20" ry="26" stroke="#f8a28c" stroke-width="2"
+                                            transform="rotate(-20 32 32)" />
+                                        <path d="M20 18 Q32 32 44 46" stroke="#f8a28c" stroke-width="2"
+                                            stroke-linecap="round" />
+                                        <circle cx="32" cy="32" r="18" fill="#f8a28c" fill-opacity="0.1"
+                                            transform="rotate(-20 32 32)" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Process Section: use dark red for contrast -->
+            <section class="py-32 relative overflow-hidden" id="process" style="background-color:#6d1012;">
+                <div class="absolute inset-0 halftone-bg opacity-40"></div>
+                <div class="max-w-7xl mx-auto px-6 md:px-20 relative z-10 text-center">
+                    <h2 class="text-xs font-black text-white/60 tracking-[0.5em] uppercase mb-16">The Workflow</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-16 relative">
+                        <div class="flex flex-col items-center group">
+                            <div
+                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
+                                01</div>
+                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Digital Entry</h4>
+                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Profile
+                                identification via app or terminal nodes.</p>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div
+                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
+                                02</div>
+                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Auto Craft</h4>
+                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Precision brewing
+                                managed by cloud-synced hardware.</p>
+                        </div>
+                        <div class="flex flex-col items-center group">
+                            <div
+                                class="size-24 border-2 border-white text-white flex items-center justify-center text-3xl font-bold mb-8 transition-transform duration-500 group-hover:scale-110">
+                                03</div>
+                            <h4 class="text-xl font-bold mb-4 tracking-tighter uppercase">Direct Access</h4>
+                            <p class="text-white/70 text-sm font-light leading-relaxed max-w-[200px]">Zero-latency
+                                collection at your designated pickup port.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 pt-24 pb-12 px-6 md:px-20" style="background-color:#6d1012;">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
+                    <div class="md:col-span-5 flex flex-col gap-8">
+                        <div class="flex flex-col leading-none">
+                            <span class="text-3xl logo-font tracking-tighter uppercase text-white">RAWMAT</span>
+                            <span class="text-sm font-medium tracking-[0.5em] uppercase text-accent">Coffee</span>
+                        </div>
+                        <div class="flex flex-col gap-2 max-w-xs">
+                            <p class="text-white font-semibold text-sm">Rawmat Coffee Company Limited</p>
+                            <p class="text-white/50 text-sm leading-relaxed font-light">
+                                187 Jaymart Building, 8th Floor,<br />
+                                Ramkhamhaeng Road, Rat Phatthana,<br />
+                                Saphan Sung, Bangkok 10240,<br />
+                                Thailand
+                            </p>
+                            <span
+                                class="text-accent mt-2 block font-bold tracking-widest uppercase text-xs">Precision
+                                Engineered Coffee.</span>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col gap-6">
+                        <h5 class="text-xs font-black uppercase tracking-[0.3em] text-accent">Explore</h5>
+                        <div class="flex flex-col gap-4 text-sm text-white/50 font-medium">
+                            <a class="hover:text-white transition-colors" href="https://shop.line.me/@rawmatcoffee"
+                                target="_blank" rel="noopener noreferrer">Shop Here</a>
+                            <a class="hover:text-white transition-colors" href="https://linktr.ee/rawmat_location"
+                                target="_blank" rel="noopener noreferrer">Locations</a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col gap-6">
+                        <h5 class="text-xs font-black uppercase tracking-[0.3em] text-accent">Connect</h5>
+                        <div class="flex flex-col gap-4 text-sm text-white/50 font-medium">
+                            <a class="hover:text-white transition-colors" href="https://www.instagram.com/rawmatcoffee"
+                                target="_blank" rel="noopener noreferrer">Instagram</a>
+                            <a class="hover:text-white transition-colors" href="https://www.facebook.com/RAWMATCoffee"
+                                target="_blank" rel="noopener noreferrer">Facebook</a>
+                            <a class="hover:text-white transition-colors"
+                                href="https://page.line.me/266cbzrb?oat_content=url&openQrModal=true" target="_blank"
+                                rel="noopener noreferrer">Line</a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-3 flex flex-col gap-6">
+                        <h5 class="text-xs font-black uppercase tracking-[0.3em] text-accent">Status</h5>
+                        <div class="flex items-center gap-3 p-4 border border-white/10"
+                            style="background-color:rgba(138,24,26,0.4);">
+                            <span class="size-2 rounded-full bg-green-400 animate-pulse"></span>
+                            <span class="text-xs font-black uppercase tracking-widest text-white/60">All System
+                                Nodes Online</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="border-t border-white/10 pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+                    <p class="text-xs font-medium tracking-widest uppercase text-white/30">© 2024 RAWMAT COFFEE
+                        THAILAND. ALL RIGHTS RESERVED.</p>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            const isAndroid = /android/i.test(navigator.userAgent || "");
+                            const heroNote = document.querySelector("#hero-platform-note");
+                            if (heroNote && isAndroid) {
+                                heroNote.textContent = PLAY_STORE_URL === "#"
+                                    ? "Android version coming soon • iPhone users can install now"
+                                    : "Android users will be redirected to Google Play automatically";
+                            }
+                        });
+                    </script>
+                    <div class="flex gap-10">
+                        <span
+                            class="material-symbols-outlined text-white/30 hover:text-accent cursor-pointer transition-colors text-xl">database</span>
+                        <span
+                            class="material-symbols-outlined text-white/30 hover:text-accent cursor-pointer transition-colors text-xl">terminal</span>
+                        <span
+                            class="material-symbols-outlined text-white/30 hover:text-accent cursor-pointer transition-colors text-xl">barcode_scanner</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+</html>
