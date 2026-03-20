@@ -167,14 +167,14 @@
                 <div class="flex items-center">
                     <img src="WHLOGO.png" alt="RAWMAT Coffee" class="h-10 w-auto" />
                 </div>
-                <nav class="hidden md:flex items-center gap-12">
+                <!-- Navbar CTAs -->
+                <div class="hidden md:flex items-center gap-5">
                     <a class="text-sm font-bold tracking-widest uppercase text-white hover:text-accent transition-colors"
                         href="#ecosystem">Ecosystem</a>
                     <a class="text-sm font-bold tracking-widest uppercase text-white hover:text-accent transition-colors"
                         href="#menu">Menu</a>
-                </nav>
-                <!-- Navbar CTAs -->
-                <div class="flex items-center gap-2">
+                    <button onclick="document.getElementById('tos-modal').classList.remove('hidden')"
+                        class="text-sm font-bold tracking-widest uppercase text-white/70 hover:text-accent transition-colors">Terms</button>
                     <a href="https://apps.apple.com/th/app/rawmat-coffee/id6737322640" target="_blank"
                         rel="noopener noreferrer" onclick="handleAppDownload(event, 'navbar_ios')"
                         class="bg-white hover:bg-accent text-primary px-5 py-2.5 text-xs font-black tracking-[0.2em] uppercase transition-all inline-flex items-center gap-2 rounded-full">
@@ -301,9 +301,6 @@
                             </div>
                             <h4 class="text-xl font-bold mb-6 tracking-tight uppercase text-gray-900">On-Demand Delivery Integration
                             </h4>
-                            <p class="text-gray-400 leading-relaxed font-light text-sm mb-8">Multi-platform delivery
-                                connectivity (e.g., Grab) enabling customers to access RAWMAT coffee anytime, anywhere.
-                            </p>
                             <div class="h-0.5 w-12 bg-primary group-hover:w-full transition-all duration-700"></div>
                         </div>
                     </div>
@@ -318,7 +315,7 @@
                         <div>
                             <h2 class="text-xs font-black text-primary tracking-[0.5em] uppercase mb-3">Menu</h2>
                             <h3 class="text-4xl md:text-5xl font-bold tracking-tighter text-gray-900 mb-4">Structured for how people choose.</h3>
-                            <p class="text-gray-400 text-base font-light max-w-lg leading-relaxed">Browse by flavor, mood, or routine. Designed to make ordering simple and fast.</p>
+                            <p class="text-gray-400 text-base font-light whitespace-nowrap leading-relaxed">Browse by flavor, mood, or routine. Designed to make ordering simple and fast.</p>
                         </div>
                         <div class="flex gap-2 p-1 rounded-lg flex-shrink-0" style="background-color:rgba(0,0,0,0.06);">
                             <button id="btn-signature" onclick="switchTab('signature')"
@@ -340,7 +337,7 @@
                                 <div class="flex justify-between items-start gap-3 mb-2">
                                     <p class="text-xs font-black text-primary tracking-[0.2em] uppercase">Floral Fruity</p>
                                     <div class="w-8 h-8 flex-shrink-0 opacity-40 group-hover:opacity-100 transition-opacity">
-                                        <img src="Bean Icon/Rawmat_Element_RGB_Creative Logo_Coffee_2.png" alt="" class="w-full h-full object-contain" style="filter: brightness(0);" />
+                                        <img src="Bean Icon/Rawmat_Element_RGB_Creative Logo_Coffee_1.png" alt="" class="w-full h-full object-contain" style="filter: brightness(0);" />
                                     </div>
                                 </div>
                                 <h5 class="text-xl font-bold text-gray-900 mb-2 leading-tight">Iced Orange Coffee</h5>
@@ -526,8 +523,6 @@
                     <div class="md:col-span-2 flex flex-col gap-6">
                         <h5 class="text-xs font-black uppercase tracking-[0.3em] text-accent">Explore</h5>
                         <div class="flex flex-col gap-4 text-sm text-white/50 font-medium">
-                            <a class="hover:text-white transition-colors" href="https://shop.line.me/@rawmatcoffee"
-                                target="_blank" rel="noopener noreferrer">Shop Here</a>
                             <a class="hover:text-white transition-colors" href="https://linktr.ee/rawmat_location"
                                 target="_blank" rel="noopener noreferrer">Locations</a>
                         </div>
@@ -583,6 +578,62 @@
         </footer>
 
     </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="tos-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4" style="background:rgba(0,0,0,0.6);" onclick="if(event.target===this)this.classList.add('hidden')">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between px-8 py-5 border-b border-gray-100 flex-shrink-0">
+                <h2 class="text-lg font-black tracking-widest uppercase text-gray-900">Legal</h2>
+                <button onclick="document.getElementById('tos-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-700 transition-colors text-2xl leading-none">&times;</button>
+            </div>
+            <!-- Tab Switcher -->
+            <div class="flex border-b border-gray-100 flex-shrink-0">
+                <button id="tos-tab-btn" onclick="switchLegalTab('tos')" class="flex-1 px-6 py-3 text-xs font-black tracking-widest uppercase text-primary border-b-2 border-primary transition-colors">Terms of Service</button>
+                <button id="pp-tab-btn" onclick="switchLegalTab('pp')" class="flex-1 px-6 py-3 text-xs font-black tracking-widest uppercase text-gray-400 border-b-2 border-transparent transition-colors">Privacy Policy</button>
+            </div>
+            <!-- Scrollable Content -->
+            <div class="overflow-y-auto px-8 py-6 text-sm text-gray-600 leading-relaxed space-y-4">
+                <!-- Terms of Service -->
+                <div id="tos-content">
+                    <p class="text-gray-400 text-xs mb-4">By using RAWMAT services, including the mobile application, kiosks, and delivery platforms, you agree to the following terms:</p>
+                    <ul class="space-y-3 list-none">
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">01</span><span>Users must provide accurate and complete information when creating an account.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">02</span><span>RAWMAT operates a cashless system. All payments must be completed through supported digital payment methods.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">03</span><span>Promotions and campaigns may be limited in quantity, duration, or eligibility. The Company reserves the right to modify or cancel promotions without prior notice.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">04</span><span>Loyalty points are non-transferable and may be subject to expiration. Abuse or misuse may result in account suspension.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">05</span><span>Customers are responsible for selecting correct order details, including pickup location and time.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">06</span><span>The Company is not responsible for delays or service issues caused by third-party platforms such as delivery providers.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">07</span><span>Refunds are considered on a case-by-case basis. Customers must report issues within a reasonable timeframe.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">08</span><span>Users are responsible for maintaining the confidentiality of their account credentials.</span></li>
+                        <li class="flex gap-3"><span class="text-primary font-black flex-shrink-0">09</span><span>The Company is not liable for service interruptions, system downtime, or external platform failures.</span></li>
+                    </ul>
+                    <p class="text-gray-400 text-xs mt-4">These terms are governed by the laws of Thailand.</p>
+                </div>
+                <!-- Privacy Policy -->
+                <div id="pp-content" class="hidden space-y-4">
+                    <p class="text-gray-400 text-xs">Last updated: March 2026 &nbsp;|&nbsp; rawmatcoffee.com/privacy-policy</p>
+                    <div><h4 class="font-black text-gray-900 mb-1">1. Introduction</h4><p>Rawmat Coffee Company Limited respects your privacy and is committed to protecting your personal data in accordance with the Personal Data Protection Act B.E. 2562 (PDPA) of Thailand.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">2. Scope of Services</h4><p>This policy applies to: RAWMAT mobile application, in-store self-service kiosks, delivery platforms, and website services.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">3. Personal Data We Collect</h4><ul class="list-disc list-inside space-y-1 text-gray-500 text-xs mt-1"><li>Identity: Name, username / account ID</li><li>Contact: Email address, phone number</li><li>Transaction: Order history, purchase details, loyalty points</li><li>Technical: IP address, device type, OS, app usage data</li><li>Location: Approximate location for store selection or delivery</li></ul></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">4. Purpose of Data Processing</h4><p>To provide services, process orders, manage accounts, provide support, improve products, personalize experience, communicate updates, and comply with legal obligations.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">5. Legal Basis for Processing</h4><p>Contractual necessity, legal obligation, legitimate interest, and consent where required.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">6. Data Sharing</h4><p>We may share data with service providers, delivery partners, business partners for promotions, affiliates, and government authorities where required by law. We do not sell personal data.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">7. Your Rights Under PDPA</h4><p>Right to access, correct, delete, restrict, object, portability, and withdraw consent. Contact us to exercise your rights.</p></div>
+                    <div><h4 class="font-black text-gray-900 mb-1">8. Contact Information</h4><p>Rawmat Coffee Company Limited<br/>Email: support@rawmatcoffee.com<br/>Phone: 080-146-6155</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchLegalTab(tab) {
+            document.getElementById('tos-content').classList.toggle('hidden', tab !== 'tos');
+            document.getElementById('pp-content').classList.toggle('hidden', tab !== 'pp');
+            document.getElementById('tos-tab-btn').className = 'flex-1 px-6 py-3 text-xs font-black tracking-widest uppercase transition-colors ' + (tab === 'tos' ? 'text-primary border-b-2 border-primary' : 'text-gray-400 border-b-2 border-transparent');
+            document.getElementById('pp-tab-btn').className = 'flex-1 px-6 py-3 text-xs font-black tracking-widest uppercase transition-colors ' + (tab === 'pp' ? 'text-primary border-b-2 border-primary' : 'text-gray-400 border-b-2 border-transparent');
+        }
+    </script>
+
 </body>
 
 </html>
